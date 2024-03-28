@@ -18,10 +18,10 @@ const Quiz = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       const response = await fetch(
-        "https://quiz-server-ivory.vercel.app/api/quiz"
+        "https://ybnlbit7il5j6uxgskgefvq5jy0sumvo.lambda-url.eu-north-1.on.aws"
       );
       const data = await response.json();
-      setQuiz(data);
+      setQuiz(data.body);
     };
     fetchQuiz();
   }, []);
