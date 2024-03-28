@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Routes, Route } from "react-router-dom";
+import "./App.css";
+import Button from "@mui/material/Button";
+import Quiz from "./components/Quiz";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Logo_FC_Bayern_München_%282002–2017%29.svg"
+                className="App-logo"
+                alt="logo"
+              />
+              <p>Welcome to Bayern München trivia quiz!</p>
+              <Button
+                variant="outlined"
+                onClick={() => (window.location.href = "/quiz")}
+              >
+                Start
+              </Button>
+            </>
+          }
+        />
+        <Route path="/quiz" element={<Quiz />} />
+      </Routes>
     </div>
   );
 }
