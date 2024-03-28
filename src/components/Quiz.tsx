@@ -56,6 +56,7 @@ const Quiz = () => {
           ))}
         </div>
       )}
+      <Button onClick={() => window.location.reload()}>Play Again</Button>
     </div>
   );
 };
