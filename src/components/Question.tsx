@@ -1,4 +1,4 @@
-import { LinearProgress, Button } from "@mui/material";
+import { LinearProgress, Button, Box } from "@mui/material";
 interface IProps {
   question: { question: string; answer: boolean };
   next: (answer: boolean) => void;
@@ -7,7 +7,7 @@ interface IProps {
 }
 const Question = ({ question, next, activeQuestion, quiz }: IProps) => {
   return (
-    <div>
+    <Box sx={{ p: 2, border: "2px red solid" }}>
       <h1>
         <LinearProgress
           variant="determinate"
@@ -17,7 +17,7 @@ const Question = ({ question, next, activeQuestion, quiz }: IProps) => {
       <h2>{question.question}</h2>
       <Button onClick={() => next(true)}>True</Button>
       <Button onClick={() => next(false)}>False</Button>
-    </div>
+    </Box>
   );
 };
 

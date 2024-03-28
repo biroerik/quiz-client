@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Results from "./Results";
 import Question from "./Question";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 const Quiz = () => {
   const [quiz, setQuiz] = useState<{ question: string; answer: boolean }[]>();
   const [answers, setAnswers] = useState<boolean[]>([]);
@@ -30,7 +30,7 @@ const Quiz = () => {
   }
   const question = quiz[activeQuestion];
   return (
-    <div>
+    <Grid container justifyContent="center">
       {!showResult ? (
         <Question
           question={question}
@@ -41,7 +41,7 @@ const Quiz = () => {
       ) : (
         <Results quiz={quiz} answers={answers} />
       )}
-    </div>
+    </Grid>
   );
 };
 
