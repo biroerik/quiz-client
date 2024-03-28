@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import LinearProgress from "@mui/material/LinearProgress";
+import { useEffect, useState } from "react";
+import Results from "./Results";
+import Question from "./Question";
+import { CircularProgress } from "@mui/material";
 const Quiz = () => {
   const [quiz, setQuiz] = useState<{ question: string; answer: boolean }[]>();
   const [answers, setAnswers] = useState<boolean[]>([]);
@@ -14,7 +15,6 @@ const Quiz = () => {
       setShowResult(true);
     }
   };
-  console.log(answers);
   useEffect(() => {
     const fetchQuiz = async () => {
       const response = await fetch(
@@ -26,37 +26,21 @@ const Quiz = () => {
     fetchQuiz();
   }, []);
   if (!quiz) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
   const question = quiz[activeQuestion];
   return (
     <div>
       {!showResult ? (
-        <div>
-          <h1>
-            <LinearProgress
-              variant="determinate"
-              value={(100 / quiz.length) * (activeQuestion + 1)}
-            />
-          </h1>
-          <h2>{question.question}</h2>
-          <Button onClick={() => next(true)}>True</Button>
-          <Button onClick={() => next(false)}>False</Button>
-        </div>
+        <Question
+          question={question}
+          next={next}
+          activeQuestion={activeQuestion}
+          quiz={quiz}
+        />
       ) : (
-        <div>
-          <h1>Results</h1>
-          {quiz.map((q, i) => (
-            <p
-              style={{ color: q.answer === answers[i] ? "green" : "red" }}
-              key={i}
-            >
-              {q.question + " (your answer:" + answers[i] + ")"}
-            </p>
-          ))}
-        </div>
+        <Results quiz={quiz} answers={answers} />
       )}
-      <Button onClick={() => window.location.reload()}>Play Again</Button>
     </div>
   );
 };
